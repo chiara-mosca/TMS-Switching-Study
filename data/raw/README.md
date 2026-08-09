@@ -8,7 +8,7 @@ The original data source is a REDCap export from Zucker Hillside Hospital's TMS 
 - Contact narcaro@northwell.edu for data access (IRB approval pending)
   
 ## Original file details:  
-- **Filename: PHQ9Project_6.15.26
-- **N rows:** [fill in later]  
-- **N columns:** [fill in later]  
-- **Export date:** [fill in later]  
+- **Filename:** PHQ9Project_6.15.26
+- **N rows:** 1,211  
+- **N columns:** 132  
+- **Export date:** 6/15/26 
