@@ -47,3 +47,18 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# === Patient data protection ===  
+data/raw/*  
+!data/raw/README.md
+
+# Intermediate data 
+# data/intermediate/*
+
+# Large files  
+*.pdf  
+*.xlsx
+
+# OS files  
+.DS_Store  
+Thumbs.db  
