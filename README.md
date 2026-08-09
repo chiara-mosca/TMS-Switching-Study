@@ -1,7 +1,5 @@
 # TMS-Switching-Study
-# To Switch or Not to Switch?
-
-Protocol Change from iTBS to Bilateral Transcranial Magnetic Stimulation is Associated with Improved PHQ-9 Trajectory
+# To Switch or Not to Switch?: Protocol Change from iTBS to Bilateral Transcranial Magnetic Stimulation is Associated with Improved PHQ-9 Trajectory
 
 ## Authors  
 Chiara Mosca, Ashkan Davani, Noelle Arcaro, Andrea Joanlanne, Anil Malhotra, Miklos Argyelan
@@ -9,7 +7,7 @@ Chiara Mosca, Ashkan Davani, Noelle Arcaro, Andrea Joanlanne, Anil Malhotra, Mik
 Zucker Hillside Hospital & Feinstein Institutes for Medical Research
 
 ## Overview  
-This repository contains analysis code and data provenance documentation for a retrospective study examining whether switching non-responsive iTBS patients to bilateral TBS is associated with improved PHQ-9 trajectories  
+Please read data_provenance.md in docs folder for data cleaning pipeline. This repository contains analysis code and data provenance documentation for a retrospective study examining whether switching non-responsive iTBS patients to bilateral TBS is associated with improved PHQ-9 trajectories  
 
 ## Repository Structure  
     TMS-Switching-Study/  
