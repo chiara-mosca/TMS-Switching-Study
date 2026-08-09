@@ -12,18 +12,36 @@ Please read data_provenance.md in docs folder for data cleaning pipeline. This r
 ## Repository Structure  
     TMS-Switching-Study/  
     │  
-    ├── code/                       # R scripts (numbered in execution order)  
+    ├── code/   
     │  
     ├── data/  
-    │   ├── raw/                    # Original REDCap export (not shared)  
-    │   ├── intermediate/           # Cleaned intermediate files  
-    │   └── final/                  # Analysis-ready dataset  
+    │   ├── raw/  
+    │   │   └── README.md                          # Placeholder (raw data not shared - PHI)  
+    │   │  
+    │   ├── initial_cleaning/  
+    │   │   ├── .gitkeep  
+    │   │   └── phq_scores_clean.xlsx              # De-identified PHQ-9 item-level data  
+    │   │  
+    │   ├── intermediate/  
+    │   │   ├── .gitkeep  
+    │   │   ├── tms_clean_longitudinal.xlsx         # Longitudinal data with visit numbering  
+    │   │   └── tms_clean_outcomes(in).csv          # Patient-level outcomes summary  
+    │   │  
+    │   └── final/  
+    │       ├── .gitkeep  
+    │       ├── analytic_sample_long.xlsx           # Final longitudinal analytic dataset (N=85)  
+    │       └── excluded_patients.xlsx              # Excluded patients with reasons (N=28)  
     │  
-    ├── docs/                       # Data provenance, variable dictionary  
+    ├── docs/  
+    │   └── data_provenance.md  
     │  
-    └── output/  
-        ├── figures/                # Publication figures  
-        └── tables/                 # Results tables  
+    ├── output/  
+    │   ├── figures/                                # Publication figures 
+    │   └── tables/                                 # Results tables 
+    │  
+    ├── .gitignore  
+    ├── LICENSE  
+    └── README.md  
 
 
 ## Reproduction  
