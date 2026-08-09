@@ -1,7 +1,7 @@
 # Data Provenance Log
 
-## Study: To Switch or Not to Switch?  
-## Last Updated: [TODAY'S DATE]
+## Study: To Switch or Not to Switch?: Protocol Change from iTBS to Bilateral Transcranial Magnetic Stimulation is Associated with Improved PHQ-9 Trajectory  
+## Last Updated: 8/9/26 by Chiara Mosca
 
 ---
 
@@ -9,60 +9,84 @@
 
 - **System:** REDCap (Zucker Hillside Hospital)  
 - **Project:** TMS Clinic Database  
-- **Export Date:** [DATE]  
-- **Exported By:** [NAME]  
-- **Original File:** `redcap_export_YYYY-MM-DD.csv`  
-- **Original Dimensions:** [X] rows x [Y] columns  
-- **IRB Protocol:** [NUMBER]
+- **Export Date:** 6/15/26 
+- **Exported By:** Noelle Arcaro  
+- **Original File:** PHQ9Project_6.15.26.csv  
+- **Original Dimensions:** 1,211 rows x 132 columns  
+- **IRB Protocol:** Submitted, pending approval
 
 ---
 
 ## 2. Cleaning Pipeline
 
-### Step 1: Initial Import and Variable Selection  
-- **Script:** `code/00_data_cleaning.R`  
-- **Input:** `data/raw/redcap_export_YYYY-MM-DD.csv`  
-- **Output:** `data/intermediate/cleaned_phq9.csv`  
+### Step 1: Patient De-identification (Raw Data File -> Intermediate Data File)
+- **Script:**  
+- **Input:** Raw REDCap export (1,211 rows x 132 columns) PHQ9Project_6.15.26.csv  
+- **Output:** Intermediate ID file (not included in GitHub repository due to patient data protection, contact Noelle Arcaro for file access) ID_refs_PHI.xlsx
 - **Actions:**  
-  - Selected relevant variables: [list them]  
-  - Renamed variables for consistency  
-  - Converted date fields to Date format  
-  - Removed duplicate entries (n = ?)  
-  - Filtered to MDD diagnosis only
+  - Extracted 146 unique patients from record_id
+  - Assigned sequential de-identified IDs (TMS001-TMS146)
+  - Mapped patient names to study_id
+ 
+### Step 2: Initial Exclusion Criteria (Raw Data File -> Intermediate Data File)
+- **Script:**
+- ***Total patients in REDCap raw data file:** 146
+- ***Total patients in intermediate cleaned data:** 130
+- **Excluded:** 16 patients
+    - 1 test/template row (TMS001)
+    -  15 patients with no usable PHQ-9 data: TMS005, TMS019, TMS026, TMS028, TMS030, TMS042, TMS059, TMS068, TMS072, TMS078, TMS080, TMS089, TMS104, TMS105, TMS109
+    - Reasons: no PHQ-9 forms in folder, rTMS study participants with blank course 1, discontinued courses with no assessments
 
-### Step 2: PHQ-9 Data Restructuring  
-- **Script:** `code/00_data_cleaning.R`  
-- **Input:** `data/intermediate/cleaned_phq9.csv`  
-- **Output:** `data/intermediate/item_level_long.csv`  
+### Step 3: PHQ-9 Data Extraction (Raw Data File -> Intermediate Data File)  
+- **Script:**  
+- **Input:** Raw REDCap export (1,211 rows x 132 columns) PHQ9Project_6.15.26.csv & Intermediate ID file (not included in GitHub repository due to patient data protection, contact Noelle Arcaro for file access) ID_refs_PHI.xlsx
+- **Output:** phq_scores_clean.xlsx
 - **Actions:**  
-  - Reshaped from wide to long format (one row per session per patient)  
-  - Created session number variable  
-  - Created week variable  
-  - Calculated PHQ-9 total scores  
-  - Extracted individual PHQ-9 items (1-9)
+  - Replaced patient names with de-identified study_ids
+  - Extracted course number (1-4) from redcap_event_name
+  - Dropped course summary columns (demographics, protocol info, session counts)
+  - Retained: study_id, course, phq9_date, protocol_doa, treatmentnumber, phq9_1, phq9_2, phq9_3, phq9_4, phq9_5, phq9_6, phq9_7, phq9_8, phq9_9, phq9_score, phq9_how difficult
+  - protocol_doa coding: 0 = baseline/pre-treatment, 1=iTBS, 2=iTBS/cTBS Bilateral, 3=cTBS, 4=10 Hz, 5=10 Hz/1 Hz Bilateral
+ 
+**Variable Dictionary - phq_scores_clean.xlsx (intermediate data file)**
+| Variable | Type | Description | Values/Range |  
+|---|---|---|---|  
+| study_id | character | De-identified patient ID | TMS002–TMS146 |  
+| course | integer | Treatment course number | 1–4 |  
+| phq9_date | date | Date of PHQ-9 assessment | Various |  
+| protocol_doa | integer | Protocol at date of assessment | 0=baseline/pretreatment, 1=iTBS, 2=iTBS/cTBS Bilateral, 3=cTBS, 4=10Hz, 5=10Hz/1Hz Bilateral |  
+| treatmentnumber | integer | Session number within current protocol | 1–69 |  
+| phq9_1 | integer | Anhedonia (little interest/pleasure) | 0–3 |  
+| phq9_2 | integer | Depressed mood (feeling down) | 0–3 |  
+| phq9_3 | integer | Sleep disturbance | 0–3 |  
+| phq9_4 | integer | Fatigue/low energy | 0–3 |  
+| phq9_5 | integer | Appetite changes | 0–3 |  
+| phq9_6 | integer | Guilt/worthlessness | 0–3 |  
+| phq9_7 | integer | Concentration difficulties | 0–3 |  
+| phq9_8 | integer | Psychomotor changes | 0–3 |  
+| phq9_9 | integer | Suicidal ideation | 0–3 |  
+| phq9_score | integer | PHQ-9 total score | 0–27 |  
+| phq9_how_difficult | integer | Difficulty question | 1–4 |
 
-### Step 3: Group Assignment  
-- **Script:** `code/00_data_cleaning.R`  
-- **Input:** `data/intermediate/item_level_long.csv`  
-- **Output:** `data/intermediate/itbs_only.csv`, `data/intermediate/switchers.csv`  
+### Step 4: Demographics Extraction (Raw Data File -> Intermediate Data File)  
+- **Script:**   
+- **Input:** Raw REDCap export (1,211 rows x 132 columns) PHQ9Project_6.15.26.csv & Intermediate ID file (not included in GitHub repository due to patient data protection, contact Noelle Arcaro for file access) ID_refs_PHI.xlsx
+- **Output:** patients_clean.xlsx (not included in GitHub repository due to patient data protection, contact Noelle Arcaro for file access) 
 - **Actions:**  
-  - Classified patients as iTBS-only (n = 41) or switchers (n = 46)  
-  - **Classification criteria:**  
-    - [DOCUMENT EXACTLY HOW YOU DEFINED "SWITCHER"]  
-    - [How was "non-response" operationalized?]  
-    - [At what session/week did switches typically occur?]  
-    - [Was there a minimum number of iTBS sessions before switching?]  
-  - Created switch_session variable for switchers  
-  - Created pre_switch and post_switch phase indicators
+  - Extracted sex, tmsdiagnosis, and dob from patientcourse_info rows
+  - Calculated age_at_first_phq from dob and first PHQ-9 date
+  - Replaced record_id with study_id
+  - Retained: study_id, age_at_first_phq, sex, tmsdiagnosis
+ 
+**Variable Dictionary - patients_clean.xlsx (intermediate data file)**
+| Variable | Type | Description | Values |  
+|---|---|---|---|  
+| study_id | character | De-identified patient ID | TMS002–TMS146 |  
+| age_at_first_phq | integer | Age at first PHQ-9 | 18–87 |  
+| sex | integer | Sex | 1=Male, 2=Female |  
+| tmsdiagnosis | integer | TMS diagnosis | 1=MDD, 2=Bipolar, 3=MDD/OCD |
 
-### Step 4: Exclusions  
-- **Script:** `code/00_data_cleaning.R`  
-- **Actions:**  
-  - Total charts reviewed: [N]  
-  - Excluded: no MDD diagnosis (n = ?)  
-  - Excluded: fewer than [X] PHQ-9 assessments (n = ?)  
-  - Excluded: [other reasons] (n = ?)  
-  - **Final analytic sample: N = 87**
+
 
 ### Step 5: Final Analysis Dataset  
 - **Script:** `code/00_data_cleaning.R`  
