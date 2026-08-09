@@ -12,16 +12,20 @@ Zucker Hillside Hospital & Feinstein Institutes for Medical Research
 This repository contains analysis code and data provenance documentation for a retrospective study examining whether switching non-responsive iTBS patients to bilateral TBS is associated with improved PHQ-9 trajectories  
 
 ## Repository Structure  
-TMS-Switching-Study/
-├── code/ # R scripts (numbered in execution order)
-├── data/
-│ ├── raw/ # Original REDCap export (not shared)
-│ ├── intermediate/ # Cleaned intermediate files
-│ └── final/ # Analysis-ready dataset
-├── docs/ # Data provenance, variable dictionary
-├── output/
-│ ├── figures/ # Publication figures
-│ └── tables/ # Results tables
+    TMS-Switching-Study/  
+    │  
+    ├── code/                       # R scripts (numbered in execution order)  
+    │  
+    ├── data/  
+    │   ├── raw/                    # Original REDCap export (not shared)  
+    │   ├── intermediate/           # Cleaned intermediate files  
+    │   └── final/                  # Analysis-ready dataset  
+    │  
+    ├── docs/                       # Data provenance, variable dictionary  
+    │  
+    └── output/  
+        ├── figures/                # Publication figures  
+        └── tables/                 # Results tables  
 
 
 ## Reproduction  
