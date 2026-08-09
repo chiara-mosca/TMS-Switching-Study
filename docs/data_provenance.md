@@ -1,7 +1,7 @@
 # Data Provenance Log
 
-## Study: To Switch or Not to Switch?: Protocol Change from iTBS to Bilateral Transcranial Magnetic Stimulation is Associated with Improved PHQ-9 Trajectory  
-## Last Updated: 8/9/26 by Chiara Mosca
+## To Switch or Not to Switch?: Protocol Change from iTBS to Bilateral Transcranial Magnetic Stimulation is Associated with Improved PHQ-9 Trajectory  
+## Last Updated: 8/9/26 by CM
 
 ---
 
@@ -86,8 +86,6 @@
 | sex | integer | Sex | 1=Male, 2=Female |  
 | tmsdiagnosis | integer | TMS diagnosis | 1=MDD, 2=Bipolar, 3=MDD/OCD |
 
-
-
 ### Step 5: Final Analysis Dataset  
 - **Script:** `code/00_data_cleaning.R`  
 - **Input:** intermediate files  
@@ -100,38 +98,3 @@
   - Spot-checked 5 random patients against original REDCap records
 
 ---
-
-## 3. Variable Dictionary
-
-| Variable | Type | Description | Values/Range |  
-|---|---|---|---|  
-| patient_id | character | De-identified patient ID | P001-P087 |  
-| group | factor | Treatment group | "itbs_only", "switcher" |  
-| session_num | integer | Session number | 1-[max] |  
-| week | numeric | Week of treatment | 0-[max] |  
-| phq9_total | integer | PHQ-9 total score | 0-27 |  
-| phq9_item1 | integer | Anhedonia | 0-3 |  
-| phq9_item2 | integer | Depressed mood | 0-3 |  
-| phq9_item3 | integer | Sleep disturbance | 0-3 |  
-| phq9_item4 | integer | Fatigue | 0-3 |  
-| phq9_item5 | integer | Appetite changes | 0-3 |  
-| phq9_item6 | integer | Guilt/worthlessness | 0-3 |  
-| phq9_item7 | integer | Concentration | 0-3 |  
-| phq9_item8 | integer | Psychomotor changes | 0-3 |  
-| phq9_item9 | integer | Suicidal ideation | 0-3 |  
-| switch_session | integer | Session at which protocol changed | NA for iTBS-only |  
-| phase | factor | Treatment phase | "pre_switch", "post_switch", NA |  
-| age | numeric | Age at treatment start | [range] |  
-| sex | factor | Sex | "Male", "Female" |
-
----
-
-## 4. Analysis Scripts
-
-| Script | Purpose | Output |  
-|---|---|---|  
-| 00_data_cleaning.R | REDCap export to analysis-ready dataset | cleaned CSVs |  
-| 01_sample_characteristics.R | Table 1, demographics, baseline comparisons | Table 1 |  
-| 02_trajectory_analysis.R | HLM models, Figures 1-3 | Figures 1-3 |  
-| 03_item_analysis.R | PHQ-9 item-level models, Figures 4-5 | Figures 4-5 |  
-| 04_sensitivity_analyses.R | Covariate controls, robustness checks | Supplementary |  
