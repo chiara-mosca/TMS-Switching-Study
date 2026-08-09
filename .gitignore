@@ -53,7 +53,7 @@ data/raw/*
 !data/raw/README.md
 
 # Intermediate data 
-# data/intermediate/*
+# data/intermediate/*, some files not included for patient data protection purposes 
 
 # Large files  
 *.pdf  
