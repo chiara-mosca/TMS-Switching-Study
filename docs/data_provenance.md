@@ -182,7 +182,7 @@ outcome               | character | Clinical outcome                         | "
 group                 | character | Group assignment                         | "iTBS_only", "switcher"  
 age_at_first_phq      | integer   | Age at first PHQ-9 assessment            | 18–87  
 sex                   | integer   | Sex                                      | 1=Male, 2=Female  
-
+```
 
 ---
 
