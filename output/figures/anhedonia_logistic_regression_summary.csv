@@ -1,0 +1,5 @@
+"Model","OR","CI_95","p_value","Nagelkerke_R2","AUC"
+"Visit 1 Anhedonia","1.765","1.09-2.95","0.02357",0.0875,0.6425
+"Visit 2 Anhedonia","2.356","1.41-4.16","0.0017",0.1769,0.702
+"Anhedonia Change (V0→V1)","1.332","0.82-2.25","0.25626",0.0221,0.5704
+"Combined (Baseline + Change)","1.737 / 1.724","see above","see above",0.0822,0.6307
