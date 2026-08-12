@@ -44,20 +44,10 @@ Please read data_provenance.md in docs folder for data cleaning pipeline. This r
     └── README.md  
 
 
-## Reproduction  
-1. Clone this repository  
-2. Place raw REDCap data in `data/raw/` (requires IRB-approved access)  
-3. Run scripts in numerical order:  
-   - `00_data_cleaning.R` → generates cleaned datasets  
-   - `01_sample_characteristics.R` → Table 1  
-   - `02_trajectory_analysis.R` → Figures 1-3, HLM models  
-   - `03_item_analysis.R` → Figures 4-5, item-level models  
-   - `04_sensitivity_analyses.R` → supplementary analyses
+## Data Analysis 
+1. The most up-to-date data file is analytic_sample_long. All codes to reproduce figures/tables/supplemental analyses are located in /code.
+
 
 ## Requirements  
 - R >= 4.3.0  
 - Packages: tidyverse, lme4, lmerTest, here, janitor, ggplot2
-
-Install all dependencies:  
-```r  
-install.packages(c("tidyverse", "lme4", "lmerTest", "here", "janitor"))  
